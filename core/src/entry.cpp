@@ -42,15 +42,6 @@ extern "C" {
 
 		mapInstance[i].pick();
 	}
-
-	SOLIPLAY_API void dead(const SOLI_PLUGIN_INSTANCE i) {
-		if (mapInstance.find(i) == mapInstance.end()) {
-			host.log.error("实例 i 不存在");
-			return;
-		}
-
-		mapInstance[i].dead();
-	}
 }
 
 void destroyInstance(const SOLI_PLUGIN_INSTANCE i) {
@@ -59,5 +50,6 @@ void destroyInstance(const SOLI_PLUGIN_INSTANCE i) {
 		return;
 	}
 
+	mapInstance.find(i)->second.dead();
 	mapInstance.erase(i);
 }
